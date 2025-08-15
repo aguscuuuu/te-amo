@@ -10,7 +10,7 @@ html, body {
   height: 100vh;
   overflow: hidden;
 }
-#main-app, body, html {
+#main-app {
   position: fixed;
   top: 0; left: 0;
   width: 100vw;

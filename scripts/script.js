@@ -42,8 +42,6 @@ fetch('multimedia/treelove.svg')
           startFloatingObjects();
           // mostrar cuenta regresiva
           showCountdown();
-          // iniciar música de fondo
-          playBackgroundMusic();
         }, 1200); // tiempo para agrandar el svg
       }, totalDuration);
     }, 50);
