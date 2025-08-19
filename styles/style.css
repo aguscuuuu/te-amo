@@ -1,69 +1,120 @@
-body {
-    margin: 0;
-    padding: 0;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    background: radial-gradient(ellipse at 60% 30%, #ffacc6 60%, #ff46a5 100%);
+body, html {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  font-size: 15px;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  background: radial-gradient(ellipse at 60% 30%, #ffacc6 60%, #ff46a5 100%);
 }
-body::selection{
-    background:#ffacc6;
+body::selection {
+  background: #ffacc6;
+}
+#main-app {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden !important;  
+  max-height: 100vh;
 }
 #fireworks-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    display: block;
-    z-index: 1;
-    pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  z-index: 1;
+  pointer-events: none;
 }
 #center-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 5rem;
-    font-family: "Montserrat", sans-serif;
-    text-shadow: 2px 2px 8px #ffb3b3;
-    z-index: 2;
-    letter-spacing: 0.5rem;
-    user-select: none;
-    display: flex;
-    gap: 0.5rem;
-    pointer-events: none;
-}
-.letter {
-    opacity: 0;
-    transition: opacity 0.5s;
-}
-.tree-container {
-  width: 520px !important;
-  height: 520px !important;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  font-size: 5rem;
+  font-family: "Montserrat", sans-serif;
+  text-shadow: 2px 2px 8px #ffb3b3;
   z-index: 2;
+  letter-spacing: 0.5rem;
+  user-select: none;
+  display: flex;
+  gap: 0.5rem;
+  pointer-events: none;
+}
+.letter {
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+/* Tree container: desktop & mobile */
+.tree-container {
+  position: absolute;
+  left: 50% !important;
+  top: 50%;
+  transform: translate(-50%, -50%) !important;
+  z-index: 2;
+  width: 520px !important;
+  height: 520px !important;
+  min-width: 220px !important;
+  min-height: 220px !important;
+  max-width: 99vw !important;
+  max-height: 55vw !important;
+}
+@media (max-width: 700px) {
+  .tree-container {
+    width: 98vw !important;
+    height: 45vh !important;
+    min-width: 160px !important;
+    min-height: 160px !important;
+    max-width: 99vw !important;
+    max-height: 45vh !important;
+    top: 48vh !important;
+  }
+}
+/* reglas del style interno del html */
+.tree-container {
+  width: 400px;
+  height: 400px;
 }
 .tree-container svg {
   width: 100%;
   height: 100%;
   display: block;
 }
+.tree-container svg.move-and-scale {
+  transition: transform 1.2s cubic-bezier(.77,0,.18,1);
+  transform: translateY(60px) scale(1.18);
+}
+.tree-container svg.move-and-scale.desktop {
+  transform: translateX(200px) scale(1.50);
+}
 .tree-container svg path {
   transition: fill-opacity 0.5s, stroke-dashoffset 1.2s;
 }
-.tree-container svg.move-and-scale {
-  transition: transform 1.2s cubic-bezier(.77,0,.18,1);
-  transform: translateX(200px) scale(1.50);
+
+/* animación de corazones */
+.animated-heart {
+  transform-origin: center;
+  animation: beat 1s infinite;
 }
+@keyframes beat {
+  0%, 100% { transform: scale(1); }
+  20% { transform: scale(1.1); }
+  40% { transform: scale(0.95); }
+  60% { transform: scale(1.08); }
+  80% { transform: scale(1); }
+}
+
+/* Dedication text: desktop & mobile */
 .dedication-text {
   position: absolute;
-  top: 50%;
   left: 3%;
   right: auto;
+  top: 50%;
   transform: translateY(-50%);
   min-width: 320px;
   max-width: 600px;
@@ -82,6 +133,7 @@ body::selection{
   background: transparent;
   border-radius: 0.7em;
   transition: max-width 0.4s, min-width 0.4s, width 0.4s;
+  line-height: 1.25;
 }
 .dedication-text.typing {
   opacity: 1;
@@ -91,22 +143,23 @@ body::selection{
   from { opacity: 0; }
   to { opacity: 1; }
 }
-#floating-objects {
-  position: fixed;
-  left: 0; top: 0;
-  width: 100vw; height: 100vh;
-  pointer-events: none;
-  z-index: 10;
+@media (max-width: 700px) {
+  .dedication-text {
+    left: 50%;
+    right: auto;
+    top: 8%;
+    transform: translateX(-50%) translateY(0);
+    min-width: 0;
+    max-width: 95vw !important;
+    width: 95vw !important;
+    font-size: 0.9rem;
+    padding: 0.7em 0.7em 0.7em 0.7em;
+    max-height: 36vh !important;
+    overflow: auto;
+  }
 }
-.floating-petal {
-  position: absolute;
-  will-change: transform, opacity;
-  opacity: 0.85;
-  pointer-events: none;
-  width: 24px; height: 32px;
-  background: radial-gradient(ellipse at 60% 30%, #c48293 60%, #f13a96 100%);
-  border-radius: 60% 40% 60% 40% / 60% 60% 40% 40%;
-}
+
+/* Signature: desktop & mobile */
 .signature {
   position: relative;
   top: auto;
@@ -123,6 +176,8 @@ body::selection{
   white-space: pre;
   pointer-events: none;
   transition: opacity 0.7s;
+  background: transparent;
+  text-align: center;
 }
 .signature.visible {
   opacity: 1;
@@ -132,6 +187,14 @@ body::selection{
   from { clip-path: inset(0 100% 0 0); }
   to   { clip-path: inset(0 0 0 0); }
 }
+@media (max-width: 700px) {
+  .signature {
+    font-size: 0.9rem;
+    margin: 1.2em auto 0 auto;
+  }
+}
+
+/* Countdown: desktop & mobile */
 .countdown {
   position: fixed;
   left: 50%;
@@ -157,18 +220,37 @@ body::selection{
   transform: translateX(-50%) translateY(0);
 }
 @media (max-width: 700px) {
-  .dedication-text {
-    left: 50%;
-    right: auto;
-    top: 8%;
-    transform: translateX(-50%) translateY(0);
-    min-width: 0;
-    max-width: 95vw;
-    width: 95vw;
-    font-size: 1.3rem;
-    padding: 0.7em 0.7em 0.7em 0.7em;
+  .countdown {
+    font-size: 0.9rem;
+    min-width: 60vw;
+    max-width: 92vw;
+    bottom: 22vw;
+    padding: 0.4em 0.7em;
   }
-  .signature {
-    font-size: 1.3rem;
+}
+
+/* Floating petals */
+#floating-objects {
+  position: fixed;
+  left: 0; top: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 10;
+}
+.floating-petal {
+  position: absolute;
+  will-change: transform, opacity;
+  opacity: 0.85;
+  pointer-events: none;
+  width: 24px; height: 32px;
+  background: radial-gradient(ellipse at 60% 30%, #c48293 60%, #f13a96 100%);
+  border-radius: 60% 40% 60% 40% / 60% 60% 40% 40%;
+}
+@media (max-width: 700px) {
+  .floating-petal {
+    width: 18px;
+    height: 16px;
+    background: none;
+    border-radius: 0;
   }
 }
