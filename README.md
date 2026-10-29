@@ -23,7 +23,7 @@ This project uses HTML, CSS, and JavaScript to create a love letter that I plan 
 ## Access
 
 - **Repository:** [https://github.com/aguscuuuu/te-amo](https://github.com/aguscuuuu/te-amo)  
-- **Deployment:** 
+- **Deployment:** [https://aguscuuuu.github.io/te-amo/](https://aguscuuuu.github.io/te-amo/)
 
 ## Used Technologies
 
